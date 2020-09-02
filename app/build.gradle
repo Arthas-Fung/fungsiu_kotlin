@@ -1,0 +1,131 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
+
+android {
+    dataBinding.enabled true
+
+    compileSdkVersion 30
+
+
+    defaultConfig {
+        applicationId "fungsiu.kotlin"
+        minSdkVersion 16
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "long", "TIMESTAMP", System.currentTimeMillis() + "L"
+        multiDexEnabled true
+        flavorDimensions "version"
+    }
+
+    productFlavors {
+        dev {
+            resValue "string", "app_name", "FungSiuKotlin(DEV)"
+            applicationId "fungsiu.kotlin.dev"
+            versionName "1.0.0"
+            versionCode 1
+            buildConfigField "String", "API_DOMAIN", "\"https://jsonplaceholder.typicode.com\""
+            applicationVariants.all { variant ->
+                renameAPK(variant)
+            }
+        }
+        prod {
+            resValue "string", "app_name", "FungSiuKotlin"
+            applicationId "fungsiu.kotlin"
+            versionName "1.0.0"
+            versionCode 1
+            buildConfigField "String", "API_DOMAIN", "\"https://jsonplaceholder.typicode.com\""
+            applicationVariants.all { variant ->
+                renameAPK(variant)
+            }
+        }
+    }
+    buildTypes {
+        debug {
+            minifyEnabled false
+        }
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        dev.setRoot('product-types/dev')
+        prod.setRoot('product-types/prod')
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72"
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.core:core-ktx:1.3.1'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+
+    // firebase
+    implementation 'com.google.firebase:firebase-analytics:17.4.4'
+    implementation 'com.google.firebase:firebase-crashlytics:17.1.1'
+
+    // chrome inspect
+    // chrome://inspect/#devices
+    implementation 'com.facebook.stetho:stetho:1.5.0'
+
+    // HTTP client
+    // retrofit2
+    implementation 'com.squareup.okhttp3:okhttp:4.3.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.8.1'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
+    implementation "com.squareup.retrofit2:adapter-rxjava2:2.6.1"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.3.1"
+
+    // gson
+    implementation 'com.google.code.gson:gson:2.8.5'
+
+    // RxKotlin
+    implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
+    implementation "io.reactivex.rxjava2:rxkotlin:2.4.0"
+
+    // database
+    // room
+    implementation "androidx.room:room-runtime:2.2.5"
+    kapt "androidx.room:room-compiler:2.2.5"
+
+    // image loading framework
+    // glide
+    implementation 'com.github.bumptech.glide:glide:4.10.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
+
+    // logger
+    implementation 'com.elvishew:xlog:1.6.1'
+
+    // mocking framework
+    // mockito
+    testImplementation "org.mockito:mockito-core:2.27.0"
+    androidTestImplementation "org.mockito:mockito-core:2.27.0"
+    testImplementation 'android.arch.core:core-testing:2.2.0'
+}
+
+def renameAPK(variant) {
+    def formattedDate = new Date().format('yyyyMMdd')
+
+    variant.outputs.all {
+        outputFileName = "fungsiu-" + variant.productFlavors[0].name + " V" + variant.versionName + " " + formattedDate + ".apk"
+    }
+}

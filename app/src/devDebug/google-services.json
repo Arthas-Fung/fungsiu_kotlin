@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "252655027867",
+    "firebase_url": "https://fungsiukotlin.firebaseio.com",
+    "project_id": "fungsiukotlin",
+    "storage_bucket": "fungsiukotlin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:252655027867:android:3133a3d558fbb2ef0e683e",
+        "android_client_info": {
+          "package_name": "fungsiu.kotlin.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "252655027867-6c4pc74gjiolpu5ntv5u38hd0jbjl3r4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAW81uOk6p5V4CB5aTyldH1Wt8SR9ibbbg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "252655027867-6c4pc74gjiolpu5ntv5u38hd0jbjl3r4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+
+        <variable
+            name="vm"
+            type="fungsiu.kotlin.module.post.viewmodel.PostListViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/rootView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".module.post.view.PostListActivity">
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginVertical="16dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="17sp"
+                android:text="@{vm.modifiedId(vm.listItem.id)}" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="17sp"
+                android:text="@{vm.modifiedTitle(vm.listItem.title)}" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvBody"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:text="@{vm.listItem.body}" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
